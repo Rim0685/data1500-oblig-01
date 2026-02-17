@@ -1,10 +1,10 @@
 # Besvarelse - Refleksjon og Analyse
 
-**Student:** [Ditt navn]
+**Student:** Rim
 
-**Studentnummer:** [Ditt studentnummer]
+**Studentnummer:** rikas0685
 
-**Dato:** [Innleveringsdato]
+**Dato:** 01.03.26
 
 ---
 
@@ -16,17 +16,29 @@
 
 [Skriv ditt svar her - list opp alle entitetene du har identifisert]
 
+Kunder
+sykkelstasjoner
+sykkel
+system 
+
+
+
 **Attributter for hver entitet:**
 
 [Skriv ditt svar her - list opp attributtene for hver entitet]
 
----
+Kunder: mobilNr, epost, fornavn, etternavn, betale, betalingskort 
+sykkelstasjoner: sykkel, betaling, lås, sykkelstativ, 
+sykkel: utleietidspunkt, innleveringstidspunkt, ID, sykkelstasjon, lås, tidsro
+system: sykkelstasjoner, kunder, sykler, sykler tilgjengelige, stasjoner, utleide sykler, registrert betaling
 
 ### Oppgave 1.2: Datatyper og `CHECK`-constraints
 
 **Valgte datatyper og begrunnelser:**
 
 [Skriv ditt svar her - forklar hvilke datatyper du har valgt for hver attributt og hvorfor]
+
+
 
 **`CHECK`-constraints:**
 
