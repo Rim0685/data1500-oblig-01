@@ -28,8 +28,8 @@ system
 [Skriv ditt svar her - list opp attributtene for hver entitet]
 
 Kunder: mobilNr, epost, fornavn, etternavn, betale, betalingskort 
-sykkelstasjoner: sykkel, betaling, lås, sykkelstativ, 
-sykkel: utleietidspunkt, innleveringstidspunkt, ID, sykkelstasjon, lås, tidsro
+sykkelstasjoner: sykkel, betaling, lås, sykkelstativ 
+sykkel: utleietidspunkt, innleveringstidspunkt, ID, sykkelstasjon, lås, tidsrom
 system: sykkelstasjoner, kunder, sykler, sykler tilgjengelige, stasjoner, utleide sykler, registrert betaling
 
 ### Oppgave 1.2: Datatyper og `CHECK`-constraints
@@ -38,7 +38,35 @@ system: sykkelstasjoner, kunder, sykler, sykler tilgjengelige, stasjoner, utleid
 
 [Skriv ditt svar her - forklar hvilke datatyper du har valgt for hver attributt og hvorfor]
 
+Kunder: 
+mobilNr (Integer), Fordi det er hele nummer og tlf nummer kan ikke inneholde desimaler. 
+epost(char), fornavn(char), fordi det er teskst. 
+etternavn (char), fordi det er teskt. 
+betaling (Decimal), fordi det er ikke sikkert på at tallet er heltal eller har desimaler. 
+betalingskort (Integer), fordi betalingskort inneholder ikke desimaler. 
 
+sykkelstasjoner: 
+sykkelID (Integer), fordi det er ikke vanlig for en id å ha desimaler. 
+betaling(Decimal), fordi det er ikke bestemt om beløpet har desimaler eller ikke. 
+lås(boolean), for å se om låsen er tilgjengelig eller ikke, true or false. 
+sykkelstativ(boolean), for å se hvilke sykkelstativer er tilgjengelige 
+sykler tilgjengelige(boolean), for å se hvilke sykler som er tilgjengelige. 
+
+sykkel: 
+utleietidspunkt (TimeStamp), fordi utleing av sykler blir beregnet med tideb den er lånt til tiden den er returnert.
+innleveringstidspunkt(TimeStamp), fordi utleing av sykler blir beregnet med tideb den er lånt til tiden den er returnert.
+sykkelID(Integer), fordi det er ikke vanlig for en id å ha desimaler. 
+sykkelstasjon(char), for å vite hvilke sykkelstasjon det gjelder med navn eller sted. 
+lås(Integer), 
+betaling(Decimal)
+
+system: 
+sykkelstasjoner(char), for å ha en oversikt over sykkelstasjoner
+kunder(char), for å holde oversikt over hvilke kunder som har benyttet servicen 
+sykkelID (Integer), fordi det er ikke vanlig for en id å ha desimaler. 
+sykler tilgjengelige(Boolean), holder oversikt over om sykler er tilgjengelige i sykkelstasjonene og om de er returnert. 
+utleide sykler (integer), for å holde oversikt over hvor mange sykler som er leid. 
+registrert betaling(Boolean), fordi true eller false om en betalking er gjort 
 
 **`CHECK`-constraints:**
 
