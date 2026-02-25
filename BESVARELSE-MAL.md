@@ -15,7 +15,7 @@
 **Identifiserte entiteter:**
 
 [Skriv ditt svar her - list opp alle entitetene du har identifisert]
-
+Entitetene jeg har identifisert: 
 Kunder
 sykkelstasjoner
 sykkel
@@ -66,11 +66,23 @@ kunder(char), for å holde oversikt over hvilke kunder som har benyttet servicen
 sykkelID (Integer), fordi det er ikke vanlig for en id å ha desimaler. 
 sykler tilgjengelige(Boolean), holder oversikt over om sykler er tilgjengelige i sykkelstasjonene og om de er returnert. 
 utleide sykler (integer), for å holde oversikt over hvor mange sykler som er leid. 
-registrert betaling(Boolean), fordi true eller false om en betalking er gjort 
+registrert betaling(Boolean), fordi true eller false om en betaling er gjort 
 
 **`CHECK`-constraints:**
 
 [Skriv ditt svar her - list opp alle CHECK-constraints du har lagt til og forklar hvorfor de er nødvendige]
+
+CHECK (pris >= 0)
+CHECK (beløp >= 0)
+CHECK (antall_stativ > 0)
+CHECK (status IN ('tilgjengelig','utleid'))
+CHECK (betalingsstatus IN ('betalt','ikkeBetalt'))
+CHECK (innleveringstidspunkt IS NULL OR innleveringstidspunkt > utleietidspunkt)
+
+sikrer:
+ingen negative priser
+gyldige staus av tilgjengelige sykler 
+riktig tidsrekkefølge 
 
 **ER-diagram:**
 
