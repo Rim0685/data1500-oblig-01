@@ -88,6 +88,45 @@ riktig tidsrekkefølge
 
 [Legg inn mermaid-kode eller eventuelt en bildefil fra `mermaid.live` her]
 
+![alt text](image.png)
+
+erDiagram
+  Kunder ||--o{ sykkelstasjoner : places
+  sykkelstasjoner ||--o{ sykkel : contains
+  system ||--|{ sykkelstasjoner : manages
+  
+  Kunder {
+    int mobilNr
+    char epost
+    char fornavn
+    char Etternavn
+    double betale
+    string betalingskort
+  }
+
+  sykkelstasjoner {
+    int sykkelID
+    decimal betaling
+    boolean lås
+    boolean sykkelstativ
+    boolean syklerTilgjengelige
+  }
+  sykkel {
+    timestamp utleietidspunkt
+    timestamp innleveringstidspunkt
+    int sykkelID
+    char sykkelstasjon
+    int lås
+    decimal betaling
+  }
+  system {
+    char sykkelstasjoner
+    char kunder
+    int sykkelID
+    boolean syklerTilgjengelige
+    int utleideSykler
+    boolean registrertBetaling
+  }
 ---
 
 ### Oppgave 1.3: Primærnøkler
