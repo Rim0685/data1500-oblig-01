@@ -88,7 +88,7 @@ riktig tidsrekkefølge
 
 [Legg inn mermaid-kode eller eventuelt en bildefil fra `mermaid.live` her]
 
-![alt text](image.png)
+
 
 erDiagram
   Kunder ||--o{ sykkelstasjoner : places
@@ -96,6 +96,7 @@ erDiagram
   system ||--|{ sykkelstasjoner : manages
   
   Kunder {
+    int KundeID
     int mobilNr
     char epost
     char fornavn
@@ -105,6 +106,7 @@ erDiagram
   }
 
   sykkelstasjoner {
+    int sykkelstasjonID (PK)
     int sykkelID
     decimal betaling
     boolean lås
@@ -120,8 +122,9 @@ erDiagram
     decimal betaling
   }
   system {
-    char sykkelstasjoner
-    char kunder
+    int systemID 
+    int sykkelstasjonID
+    int kundeID
     int sykkelID
     boolean syklerTilgjengelige
     int utleideSykler
@@ -135,15 +138,106 @@ erDiagram
 
 [Skriv ditt svar her - forklar hvilke primærnøkler du har valgt for hver entitet og hvorfor]
 
+Kunder {
+    int KundeID (PK)
+    int mobilNr 
+    char epost
+    char fornavn
+    char Etternavn
+    double betale
+    string betalingskort 
+  }
+Fordi KundeId er unikt for hver kunde og ingen andre kan ha det. 
+
+  sykkelstasjoner {
+    int sykkelstasjonID (PK)
+    int sykkelID 
+    decimal betaling
+    boolean lås
+    boolean sykkelstativ
+    boolean syklerTilgjengelige
+  }
+Fordi hver sykkelID er unik for hver sykkel og ingen andre sykler kan ha samme id. 
+
+  sykkel {
+    timestamp utleietidspunkt
+    timestamp innleveringstidspunkt
+    int sykkelID (PK)
+    char sykkelstasjon
+    int lås
+    decimal betaling
+  }
+  Fordi hver sykkelID er unik for hver sykkel og ingen andre sykler kan ha samme id. 
+
+  system {
+    int systemID (PK)
+    int sykkelstasjonID (PK)
+    int kundeID
+    int sykkelID
+    boolean syklerTilgjengelige
+    int utleideSykler
+    boolean registrertBetaling
+  }
+Fordi hver systemID er unik for hvert system og ingen andre system kan ha samme id. 
+
 **Naturlige vs. surrogatnøkler:**
 
 [Skriv ditt svar her - diskuter om du har brukt naturlige eller surrogatnøkler og hvorfor]
+
+jeg har brukt surrogatnøkler fordi det er en stabil identifikasjon for hvert entitet og kan ikke endres eller gjenbrukes av andre som gjør dem unike. 
+
 
 **Oppdatert ER-diagram:**
 
 [Legg inn mermaid-kode eller eventuelt en bildefil fra `mermaid.live` her]
 
----
+erDiagram
+  Kunder ||--o{ sykkelstasjoner : manages
+  Kunder ||--o{ system : interacts_with
+  sykkelstasjoner ||--o{ sykkel : has
+  system }o--|| sykkel : rents
+  system ||--o{ Kunder : includes
+
+  Kunder {
+    int KundeID PK
+    int mobilNr
+    char epost
+    char fornavn
+    char Etternavn
+    double betale
+    string betalingskort
+  }
+
+
+  sykkelstasjoner {
+    int sykkelstasjonID PK
+    int sykkelID
+    decimal betaling
+    boolean lås
+    boolean sykkelstativ
+    boolean syklerTilgjengelige
+  }
+
+
+  sykkel {
+    timestamp utleietidspunkt
+    timestamp innleveringstidspunkt
+    int sykkelID PK
+    char sykkelstasjon
+    int lås
+    decimal betaling
+  }
+  
+
+  system {
+    int systemID PK
+    int sykkelstasjonID
+    int kundeID
+    int sykkelID
+    boolean syklerTilgjengelige
+    int utleideSykler
+    boolean registrertBetaling
+  }
 
 ### Oppgave 1.4: Forhold og fremmednøkler
 
@@ -151,9 +245,52 @@ erDiagram
 
 [Skriv ditt svar her - list opp alle forholdene mellom entitetene og angi kardinalitet]
 
+
+
 **Fremmednøkler:**
 
 [Skriv ditt svar her - list opp alle fremmednøklene og forklar hvordan de implementerer forholdene]
+
+ Kunder {
+    int KundeID PK
+    int mobilNr
+    char epost
+    char fornavn
+    char Etternavn
+    double betale
+    string betalingskort
+  }
+
+
+  sykkelstasjoner {
+    int sykkelstasjonID PK
+    int sykkelID
+    decimal betaling
+    boolean lås
+    boolean sykkelstativ
+    boolean syklerTilgjengelige
+  }
+
+
+  sykkel {
+    timestamp utleietidspunkt
+    timestamp innleveringstidspunkt
+    int sykkelID PK
+    char sykkelstasjon
+    int lås
+    decimal betaling
+  }
+  
+
+  system {
+    int systemID PK
+    int sykkelstasjonID
+    int kundeID
+    int sykkelID
+    boolean syklerTilgjengelige
+    int utleideSykler
+    boolean registrertBetaling
+  }
 
 **Oppdatert ER-diagram:**
 
