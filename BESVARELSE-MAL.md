@@ -27,7 +27,7 @@ system
 
 [Skriv ditt svar her - list opp attributtene for hver entitet]
 
-Kunder: mobilNr, epost, fornavn, etternavn, betale, betalingskort 
+Kunder: mobilNr, epost, fornavn, etternavn, betale
 sykkelstasjoner: sykkel, betaling, lås, sykkelstativ 
 sykkel: utleietidspunkt, innleveringstidspunkt, ID, sykkelstasjon, lås, tidsrom
 system: sykkelstasjoner, kunder, sykler, sykler tilgjengelige, stasjoner, utleide sykler, registrert betaling
@@ -42,8 +42,7 @@ Kunder:
 mobilNr (Integer), Fordi det er hele nummer og tlf nummer kan ikke inneholde desimaler. 
 epost(char), fornavn(char), fordi det er teskst. 
 etternavn (char), fordi det er teskt. 
-betaling (Decimal), fordi det er ikke sikkert på at tallet er heltal eller har desimaler. 
-betalingskort (Integer), fordi betalingskort inneholder ikke desimaler. 
+betaling (Decimal), fordi det er ikke sikkert på at tallet er heltal eller har desimaler.  
 
 sykkelstasjoner: 
 sykkelID (Integer), fordi det er ikke vanlig for en id å ha desimaler. 
@@ -102,7 +101,6 @@ erDiagram
     char fornavn
     char Etternavn
     double betale
-    string betalingskort
   }
 
   sykkelstasjoner {
@@ -145,7 +143,6 @@ Kunder {
     char fornavn
     char Etternavn
     double betale
-    string betalingskort 
   }
 Fordi KundeId er unikt for hver kunde og ingen andre kan ha det. 
 
@@ -205,7 +202,6 @@ erDiagram
     char fornavn
     char Etternavn
     double betale
-    string betalingskort
   }
 
 
@@ -245,6 +241,12 @@ erDiagram
 
 [Skriv ditt svar her - list opp alle forholdene mellom entitetene og angi kardinalitet]
 
+  Kunder mange til mange sykkelstasjoner
+  Kunder mange til en system 
+  sykkelstasjoner mange til mange sykkel 
+  sykkel en til mange system 
+  system en til mange Kunder 
+  system en til mange sykkelstasjoner 
 
 
 **Fremmednøkler:**
@@ -252,19 +254,18 @@ erDiagram
 [Skriv ditt svar her - list opp alle fremmednøklene og forklar hvordan de implementerer forholdene]
 
  Kunder {
-    int KundeID PK
+    int KundeID (PK)
     int mobilNr
     char epost
     char fornavn
     char Etternavn
     double betale
-    string betalingskort
   }
 
 
   sykkelstasjoner {
-    int sykkelstasjonID PK
-    int sykkelID
+    int sykkelstasjonID (PK)
+    int sykkelID (FK)
     decimal betaling
     boolean lås
     boolean sykkelstativ
@@ -275,18 +276,18 @@ erDiagram
   sykkel {
     timestamp utleietidspunkt
     timestamp innleveringstidspunkt
-    int sykkelID PK
-    char sykkelstasjon
+    int sykkelID (PK)
+    char sykkelstasjon (FK)
     int lås
     decimal betaling
   }
   
 
   system {
-    int systemID PK
-    int sykkelstasjonID
-    int kundeID
-    int sykkelID
+    int systemID (PK)
+    int sykkelstasjonID (FK)
+    int kundeID (FK)
+    int sykkelID (FK)
     boolean syklerTilgjengelige
     int utleideSykler
     boolean registrertBetaling
